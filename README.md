@@ -167,7 +167,7 @@ You can see a service like a self-contained module where you will define the cor
 
 I recommend you to create services to manage all api requests. You can see them as a bridge/an adapter between the server API and the view layer (scenes and components) of your application. It can take care of network calls your app will make, get and post content, and transform payloads as needed before being sent or saved in the store of your app (such as Redux). The scenes and components will only dispatch actions, read the store and update themselves based on the new changes.
 
-*Inspired by [this](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1) post by Alexis Manging*
+*Inspired by [this](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1) post by Alexis Mangin*
 
 # Misc
 
