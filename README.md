@@ -1,9 +1,20 @@
 ## Table of Contents
 
- - [Folder Structure](#folder-structure)
-   - [Components](#components)
-   - [Scenes](#scenes)
-   - [Services](#services)
+- [Folder Structure](#folder-structure)
+  - [Components](#components)
+  - [Scenes](#scenes)
+  - [Services](#services)
+- [Domain Terminology](#domain-terminology)
+  - [Pet](#pet)
+    - [Pet Flags](#pet-flags)
+      - [Temperament Flag](#temperament-flag)
+      - [Anxiety Flag](#anxiety-flag)
+      - [Grooming Flag](#grooming-flag)
+      - [Medical Flag](#medical-flag)
+      - [User Flag](#user-flag)
+  - [Customer](#customer)
+  - [Artisan](#artisan)
+- [Misc](#misc)
 
 # Folder Structure
 
@@ -168,6 +179,73 @@ You can see a service like a self-contained module where you will define the cor
 I recommend you to create services to manage all api requests. You can see them as a bridge/an adapter between the server API and the view layer (scenes and components) of your application. It can take care of network calls your app will make, get and post content, and transform payloads as needed before being sent or saved in the store of your app (such as Redux). The scenes and components will only dispatch actions, read the store and update themselves based on the new changes.
 
 *Inspired by [this](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1) post by Alexis Mangin*
+
+# Domain Terminology
+
+In order to maintain consistency throughout the application and documentation, we will define standard terms and naming conventions here.
+
+A pet is an animal that belongs to one [customer](#customer).
+
+
+## Pet
+```json
+{
+  "name":"Pet Name",
+  "species":"Species Type",
+  "breed":["Breed 1", "Breed 2"],
+  "birthday":"Birthday",
+  "gender":"Pet Gender",
+  "textNote":["Note1","Note2"],
+  "pictureNote":["BinaryPicture1","BinaryPicture2"],
+  "petFlags":[
+    {
+      "flagType":"Type of flag. Defaults are temperament, anxiety, grooming, and medical", 
+      "flagReason":"Reason for flagging / description of the condition"},
+      {
+        //another flag
+      }
+  ]
+}
+```
+
+### Pet Flags
+
+Description of the default flags
+
+#### Temperament Flag
+
+Temperament flags indicate *permanent characteristics* of a pet such as aggressiveness or frequent pooping.
+
+#### Anxiety Flag
+
+Anxiety flags indicate scenarios that can induce *temporary anxiety* such as bathing or blow drying.
+
+#### Grooming Flag
+
+Grooming flags indicate the need of *special care when grooming* such as long drying times or frequent matting.
+
+#### Medical Flag
+
+Medical flags indicate *special medical requirements* such as medicated shampoos or owner provided chemicals.
+
+#### User Flag
+
+[Artisans](#artisan) can create their own flag to use.
+
+```json
+{
+  "flagType":"Type of flag like aggression",
+  "flagReason":"Reason for flagging / description of the condition"
+}
+```
+
+## Customer
+
+Customers can be associated with many [artisans](#artisan). Customers can have zero or more [pets](#pet) registered to them. 
+
+## Artisan
+
+Artisans can have one to many [customers](#customer)
 
 # Misc
 
