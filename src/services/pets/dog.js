@@ -15,6 +15,6 @@ export default class DogApi {
             })
             .catch(function (error) {
                 console.log(error);
-            };
+            });
     }
 }
