@@ -1,12 +1,19 @@
 import React from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import TopHeaderMenu from './components/TopHeaderMenu/index';
+import PetProfile from '../../components/PetProfile/index';
+
 
 export default class Home extends React.Component {
     render() {
         return (<div>
             <TopHeaderMenu />
-            <Container text>
+            <Container>
+                <PetProfile>
+                    
+                </PetProfile>
+            </Container>
+            {/* <Container text>
                 <Header as='h2'>Header</Header>
                 <p>
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
@@ -32,7 +39,7 @@ export default class Home extends React.Component {
                     ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue.
                     Curabitur ullamcorper ultricies nisi.
                 </p>
-            </Container>
+            </Container> */}
         </div>
         );
 
