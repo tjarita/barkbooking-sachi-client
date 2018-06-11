@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Image, Segment, Popup } from 'semantic-ui-react';
+import _ from 'lodash';
 
 export default class PetProfile extends Component {
     constructor(props) {
@@ -9,7 +10,10 @@ export default class PetProfile extends Component {
             petId: null,
             pet: {}
         };
+    }
 
+    componentDidMount() {
+        this.setTestPetState();
     }
 
     setTestPetState() {
@@ -33,12 +37,8 @@ export default class PetProfile extends Component {
         });
     }
 
-    PopUp = () => {
-
-    }
-
     render() {
-
+        const { pet } = this.state;
 
         return (
             <div>
@@ -48,8 +48,11 @@ export default class PetProfile extends Component {
                         content={<Image rounded size='massive' src={require('./leeta.jpg')} />}
                     />
                     <Header.Content>
-                        Leeta
-                        <Header.Subheader>Samoyed</Header.Subheader>
+                        {pet.name} the {pet.species}
+                        <Popup
+                            trigger={<Header.Subheader>{_.map(pet.breed).join(' | ')}</Header.Subheader>}
+                            content='Breed(s)'
+                        />
                     </Header.Content>
                 </Header>
                 <Segment attached>
