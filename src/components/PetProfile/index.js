@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Header, Image, Segment, Popup, Grid, Icon, Container, Divider, List } from 'semantic-ui-react';
 import _ from 'lodash';
 import moment from 'moment';
+import PetFlags from '../PetFlags';
 
 export default class PetProfile extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            petId: null,
             pet: {}
         };
     }
@@ -19,20 +19,43 @@ export default class PetProfile extends Component {
 
     setTestPetState() {
         this.setState({
-            petId: 1,
             pet: {
+                id: 1,
                 name: "Leeta",
                 species: "Dog",
                 breed: ["Samoyed", "JustSamoyed"],
                 birthday: "01-29-2017",
                 gender: "Female",
-                textNote: ["Good girl", "Loves squeaky toys"],
-                pictureNote: ["BinaryPicture1"],
+                comments: ["Good girl", "Loves squeaky toys"],
                 petFlags: [
                     {
-                        "flagType": "Type of flag. Defaults are temperament, anxiety, grooming, and medical",
-                        "flagReason": "Reason for flagging / description of the condition"
-                    }
+                        id: 1,
+                        name: "Medical",
+                        description: "Medical flags indicate special medical requirements such as medicated shampoos or owner provided medication.",
+                        reason: "Heartworm medicine",
+                        icon: { name: "medkit", color: "" }
+                    },
+                    {
+                        id: 2,
+                        name: "Temperament",
+                        description: "Temperament flags indicate permanent characteristics of a pet such as aggressiveness or frequent pooping.",
+                        reason: "ReasonForFlag",
+                        icon: { name: "frown outline", color: "" }
+                    },
+                    {
+                        id: 3,
+                        name: "Anxiety",
+                        description: "Anxiety flags indicate scenarios that can induce temporary anxiety such as bathing or blow drying.",
+                        reason: "ReasonForFlag",
+                        icon: { name: "eye", color: "" }
+                    },
+                    {
+                        id: 4,
+                        name: "Grooming",
+                        description: "Grooming flags indicate the need of special care when grooming such as long drying times or frequent matting.",
+                        reason: "ReasonForFlag",
+                        icon: { name: "cut", color: "" }
+                    },
                 ]
             }
         });
@@ -102,68 +125,10 @@ export default class PetProfile extends Component {
                             <Grid.Row>
                                 <Grid.Column>
                                     <Divider horizontal>Flags</Divider>
-                                    <List divided relaxed selection>
-                                        <List.Item>
-                                            <Popup
-                                                trigger={<Icon bordered name='medkit' size='large'></Icon>}
-                                                content={<Container text>Medical flags indicate <strong>special medical requirements</strong> such as medicated shampoos or owner provided chemicals.</Container>}
-                                            ></Popup>
-                                            <List.Content>
-                                                <List.Header>
-                                                    Medical
-                                                </List.Header>
-                                                <List.Description>
-                                                    Description
-                                                </List.Description>
-                                            </List.Content>
-                                        </List.Item>
-                                        <List.Item>
-                                        <Popup
-                                                trigger={<Icon bordered name='frown outline' size='large'></Icon>}
-                                                content={<Container text>Temperament flags indicate <strong>permanent characteristics</strong> of a pet such as aggressiveness or frequent pooping.</Container>}
-                                            ></Popup>
-                                            <List.Content>
-                                                <List.Header>
-                                                    Temperament
-                                                </List.Header>
-                                                <List.Description>
-                                                    Description
-                                                </List.Description>
-                                            </List.Content>
-                                        </List.Item>
-                                        <List.Item>
-                                        <Popup
-                                                trigger={<Icon bordered name='eye' size='large'></Icon>}
-                                                content={<Container text>Anxiety flags indicate scenarios that can induce <strong>temporary anxiety</strong> such as bathing or blow drying.</Container>}
-                                            ></Popup>
-                                            <List.Content>
-                                                <List.Header>
-                                                    Anxiety
-                                                </List.Header>
-                                                <List.Description>
-                                                    Description
-                                                </List.Description>
-                                            </List.Content>
-                                        </List.Item>
-                                        <List.Item>
-                                        <Popup
-                                                trigger={<Icon bordered name='cut' size='large'></Icon>}
-                                                content={<Container text>Grooming flags indicate the need of <strong>special care when grooming</strong> such as long drying times or frequent matting.</Container>}
-                                            ></Popup>
-                                            <List.Content>
-                                                <List.Header>
-                                                    Grooming
-                                                </List.Header>
-                                                <List.Description>
-                                                    Description
-                                                </List.Description>
-                                            </List.Content>
-                                        </List.Item>
-
-                                    </List>
+                                    <PetFlags flags={pet.petFlags}></PetFlags>
                                 </Grid.Column>
                                 <Grid.Column>
-                                    <Divider horizontal>Notes</Divider>
+                                    <Divider horizontal>Comments</Divider>
                                 </Grid.Column>
                             </Grid.Row>
 
