@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Image, Segment, Popup, Grid, Icon, Container, Divider, List } from 'semantic-ui-react';
+import { Header, Image, Segment, Popup, Grid, Icon, Container, Divider, List, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import moment from 'moment';
 import PetFlags from '../PetFlags';
@@ -26,14 +26,14 @@ export default class PetProfile extends Component {
                 breed: ["Samoyed", "JustSamoyed"],
                 birthday: "01-29-2017",
                 gender: "Female",
-                comments: ["Good girl", "Loves squeaky toys"],
+                comments: [{ date: "01-01-2018", text: "Good girl", userId: 1 }, { date: "02-01-2018", text: "Loves squeaky toys", userId: 1 }],
                 petFlags: [
                     {
                         id: 1,
                         name: "Medical",
                         description: "Medical flags indicate special medical requirements such as medicated shampoos or owner provided medication.",
                         reason: "Heartworm medicine",
-                        icon: { name: "medkit", color: "" }
+                        icon: { name: "medkit", color: "red" }
                     },
                     {
                         id: 2,
@@ -72,7 +72,7 @@ export default class PetProfile extends Component {
         if (age.days() > 0) formattedAge = _.concat(formattedAge, this.pluralizeDate(age.days(), 'day'));
 
 
-        return `Born on ${birthdate.format('MMM Do, YYYY')} so ${_.join(formattedAge, ', ')})`;
+        return `Born on ${birthdate.format('MMM Do, YYYY')} so ${_.join(formattedAge, ', ')}`;
     }
 
     pluralizeDate(dateAmount, singularDateType) {
@@ -84,12 +84,9 @@ export default class PetProfile extends Component {
     render() {
         const { pet } = this.state;
 
-        const birthdate = moment(pet.birthday, 'MM-DD-YYYY', true);
-        const age = moment.duration(moment().diff(birthdate));
-
         return (
             <div>
-                <Container>
+                <Container key={pet.id}>
                     <Header as='h1' attached='top'>
                         <Popup
                             trigger={<Image rounded size='huge' src={require('./leeta.jpg')} />}
@@ -125,7 +122,20 @@ export default class PetProfile extends Component {
                             <Grid.Row>
                                 <Grid.Column>
                                     <Divider horizontal>Flags</Divider>
-                                    <PetFlags flags={pet.petFlags}></PetFlags>
+                                    <Segment attached>
+                                        <PetFlags flags={pet.petFlags}></PetFlags>
+                                    </Segment>
+                                    <Segment attached='bottom'>
+                                        <Button primary animated='vertical'>
+                                            <Button.Content hidden><Icon name='flag outline' /></Button.Content>
+                                            <Button.Content visible>
+                                                Add Flag
+                                            </Button.Content>
+                                        </Button>
+                                    </Segment>
+
+
+
                                 </Grid.Column>
                                 <Grid.Column>
                                     <Divider horizontal>Comments</Divider>

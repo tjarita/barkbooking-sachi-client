@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popup, Container, List, Icon } from 'semantic-ui-react';
+import { Popup, Container, List, Icon, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 
 export default function PetFlags(props = { flags: null }) {
@@ -10,6 +10,14 @@ export default function PetFlags(props = { flags: null }) {
             {
                 _.map(flags, ({ id, name, description, reason, icon }) => (
                     <List.Item key={id}>
+                        <List.Content floated='right'>
+                            <Button animated='vertical'>
+                                <Button.Content hidden>Edit</Button.Content>
+                                <Button.Content visible>
+                                    <Icon name='edit outline'/>
+                                </Button.Content>
+                            </Button>
+                        </List.Content>
                         <Popup
                             trigger={<Icon bordered name={icon.name} color={icon.color || 'black'} size='large'></Icon>}
                             content={<Container text>{description}</Container>}
