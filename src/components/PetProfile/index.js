@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Image, Segment, Popup, Grid, Icon, Container, Divider, List, Button } from 'semantic-ui-react';
+import { Header, Image, Segment, Popup, Grid, Icon, Container, Divider, Button } from 'semantic-ui-react';
 import _ from 'lodash';
 import moment from 'moment';
 import PetFlags from '../PetFlags';
@@ -9,7 +9,7 @@ export default class PetProfile extends Component {
         super(props);
 
         this.state = {
-            pet: {}
+            pet: {},
         };
     }
 
@@ -26,7 +26,34 @@ export default class PetProfile extends Component {
                 breed: ["Samoyed", "JustSamoyed"],
                 birthday: "01-29-2017",
                 gender: "Female",
-                comments: [{ date: "01-01-2018", text: "Good girl", userId: 1 }, { date: "02-01-2018", text: "Loves squeaky toys", userId: 1 }],
+                customer: {
+                    id: 1,
+
+                },
+                weight: {
+                    value: 65,
+                    units: 'lbs'
+                },
+                comments: [
+                    { id: 1, date: "01-01-2018", text: "Good girl", userId: 1 },
+                    { id: 2, date: "02-01-2018", text: "Loves squeaky toys", userId: 1 }
+                ],
+                vaccinations: [
+                    {
+                        id: 1,
+                        dateVaccinated: '01-01-2017',
+                        vaccinationDuration: { value: 1, units: 'year' },
+                        name: 'Bordetella',
+                        description: ''
+                    },
+                    {
+                        id: 2,
+                        dateVaccinated: '01-02-2017',
+                        vaccinationDuration: { value: 1, units: 'year' },
+                        name: 'Parvo',
+                        description: ''
+                    }
+                ],
                 petFlags: [
                     {
                         id: 1,
@@ -101,7 +128,7 @@ export default class PetProfile extends Component {
                         </Header.Content>
                     </Header>
                     <Segment attached>
-                        <Header size='large' dividing>Quick Information</Header>
+                        {/* <Header size='large' dividing>Quick Information</Header> */}
                         <Grid columns={2} divided>
                             <Grid.Row>
                                 <Grid.Column>
@@ -115,6 +142,22 @@ export default class PetProfile extends Component {
                                 <Grid.Column>
                                     <Header size='small'>
                                         Gender
+                                    <Header.Subheader>{pet.gender}</Header.Subheader>
+                                    </Header>
+                                </Grid.Column>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Grid.Column>
+                                    <Header size='small'>
+                                        <Header.Content>
+                                            Weight
+                                        </Header.Content>
+                                        <Header.Subheader>{pet.weight ? pet.weight.value + ` (${pet.weight.units})` : 'No weight entered.'}</Header.Subheader>
+                                    </Header>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <Header size='small'>
+                                        Vaccinations
                                     <Header.Subheader>{pet.gender}</Header.Subheader>
                                     </Header>
                                 </Grid.Column>
