@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class DogApi {
+export default class DogRestService {
     constructor() {
         this.api = axios.create({
             baseURL: 'https://dog.ceo/api',
